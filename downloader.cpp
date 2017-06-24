@@ -2,6 +2,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include <string>
+#include <QProcess>
 
 Downloader::Downloader(QObject *parent) : QObject(parent)
 {
@@ -13,6 +14,7 @@ void Downloader::set_input(QString input_string) {
         in_string = input_string;
         download_list.append(in_string);
         send_output_string(in_string);
+        clear_address();
     }
 }
 
@@ -37,20 +39,20 @@ void Downloader::download_all(void) {
 }
 
 void Downloader::download_at_index(int index) {
-    QString space = " ";
-    out_string = "";
-    out_string.append(command);
+    QProcess * wget = new QProcess;
+    wget->setProgram("wget");
     if(!uname.isEmpty()) {
-        out_string.append(uname_flag);
-        out_string.append(uname);
+        arguments.append(uname_flag);
+        arguments.append(uname);
     }
     if(!passwd.isEmpty()) {
-        out_string.append(passwd_flag);
-        out_string.append(passwd);
-        out_string.append(space);
+        arguments.append(passwd_flag);
+        arguments.append(passwd);
     }
-    out_string.append(download_list.at(index));
-    system(out_string.toStdString().c_str());
+    arguments.append(download_list.at(index));
+    wget->setArguments(arguments);
+    wget->start();
+    arguments.clear();
 }
 
 int Downloader::is_secure(QString str) {

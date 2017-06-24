@@ -18,6 +18,7 @@ public:
 public slots:
     void send_item(bool);
     void clear_list(void);
+    void clear_item(void);
 
 signals:
     void send_string(QString);

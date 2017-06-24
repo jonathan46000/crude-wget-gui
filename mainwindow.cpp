@@ -35,6 +35,9 @@ MainWindow::MainWindow(QWidget *parent) :
     MainWindow::connect(downloader,SIGNAL(clear_list_window()),
                         this,SLOT(clear_list()));
 
+    MainWindow::connect(downloader,SIGNAL(clear_address()),
+                        this,SLOT(clear_item()));
+
 }
 
 MainWindow::~MainWindow()
@@ -48,4 +51,8 @@ void MainWindow::send_item(bool) {
 
 void MainWindow::clear_list() {
     ui->item_list->clear();
+}
+
+void MainWindow::clear_item() {
+    ui->download_address->clear();
 }

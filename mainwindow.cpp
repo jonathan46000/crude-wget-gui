@@ -37,7 +37,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     MainWindow::connect(downloader,SIGNAL(clear_address()),
                         this,SLOT(clear_item()));
-
 }
 
 MainWindow::~MainWindow()

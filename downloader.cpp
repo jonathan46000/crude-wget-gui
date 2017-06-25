@@ -3,6 +3,7 @@
 #include "stdlib.h"
 #include <string>
 #include <QProcess>
+#include <QMessageBox>
 
 Downloader::Downloader(QObject *parent) : QObject(parent)
 {
@@ -58,6 +59,8 @@ void Downloader::download_at_index(int index) {
 int Downloader::is_secure(QString str) {
     if(str.contains("sudo") ||
        str.contains("./") ||
+       str.contains("/.") ||
+       str.contains("..") ||
        str.contains("/bin") ||
        str.contains("/dev") ||
        str.contains("kernel.") ||
@@ -73,6 +76,9 @@ int Downloader::is_secure(QString str) {
        str.contains("TRUE") ||
        str.contains("FALSE") ||
        str.contains("NULL")) {
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Input data is invalid!");
+        messageBox.setFixedSize(500,200);
         return 0;
     }
     else {

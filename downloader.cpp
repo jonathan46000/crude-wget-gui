@@ -14,7 +14,7 @@ Downloader::Downloader(QObject *parent) : QObject(parent)
 
 //receives url from mainwindow and inserts it in download_list
 void Downloader::set_input(QString input_string) {
-    if(is_secure(input_string)) {
+    if(is_valid(input_string)) {
         in_string = input_string;
         download_list.append(in_string);
         send_output_string(in_string);
@@ -24,14 +24,14 @@ void Downloader::set_input(QString input_string) {
 
 //receives user name from mainwindow and inserts it in uname
 void Downloader::set_uname(QString input_string) {
-    if(is_secure(input_string)) {
+    if(is_valid(input_string)) {
         uname = input_string;
     }
 }
 
 //receives passowrd from mainwindow and inserts it in passwd
 void Downloader::set_passwd(QString input_string) {
-    if(is_secure(input_string)) {
+    if(is_valid(input_string)) {
         passwd = input_string;
     }
 }
@@ -68,7 +68,7 @@ void Downloader::download_at_index(int index) {
 }
 
 //minor effort to check for malicious string insertion
-int Downloader::is_secure(QString str) {
+int Downloader::is_valid(QString str) {
     if(str.contains("sudo") ||
        str.contains("./") ||
        str.contains("/.") ||

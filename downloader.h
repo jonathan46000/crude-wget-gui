@@ -17,7 +17,7 @@ private:
     QString uname_flag = "--user";          //wget username flag
     QString passwd_flag = "--password";     //wget password flag
     void download_at_index(int index);      //function that calls wget for url on list
-    int is_secure(QString str);             //checks arguments for malicious input
+    int is_valid(QString str);             //checks arguments for malicious input
 
 public:
 

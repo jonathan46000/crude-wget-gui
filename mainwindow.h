@@ -16,17 +16,17 @@ public:
     ~MainWindow();
 
 public slots:
-    void send_item(bool);
-    void clear_list(void);
-    void clear_item(void);
-    void get_working_directory(void);
+    void send_item(bool);                   //converts add_item pushButton click to string SIGNAL
+    void clear_list(void);                  //clears download_list window
+    void clear_item(void);                  //clears url input QLineEdit
+    void get_working_directory(void);       //gets directory from QFileDialog
 
 signals:
-    void send_string(QString);
-
+    void send_string(QString);              //string SIGNAL activated by send_item(bool)
+                                            //sends url string to download_list in downloader
 private:
     Ui::MainWindow *ui;
-    QString working_directory;
-};
+    QString working_directory;              //current working directory to download to
+};                                          //should be moved to downloader eventually
 
 #endif // MAINWINDOW_H

@@ -13,6 +13,17 @@
   <property name="windowTitle">
    <string>Crude Wget Gui</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>wgg_icon.png</normaloff>
+    <normalon>wgg_icon.png</normalon>wgg_icon.png</iconset>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>32</width>
+    <height>32</height>
+   </size>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLineEdit" name="download_address">
     <property name="geometry">
@@ -133,6 +144,7 @@
     <property name="title">
      <string>Fi&amp;le</string>
     </property>
+    <addaction name="actionDownload_Path"/>
     <addaction name="actionExit"/>
    </widget>
    <addaction name="menuFile"/>
@@ -141,6 +153,11 @@
   <action name="actionExit">
    <property name="text">
     <string>&amp;Exit</string>
+   </property>
+  </action>
+  <action name="actionDownload_Path">
+   <property name="text">
+    <string>Download Path</string>
    </property>
   </action>
  </widget>

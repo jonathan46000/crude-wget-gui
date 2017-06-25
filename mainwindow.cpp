@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "downloader.h"
+#include <QDir>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -37,11 +39,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
     MainWindow::connect(downloader,SIGNAL(clear_address()),
                         this,SLOT(clear_item()));
+
+    MainWindow::connect(ui->actionDownload_Path,SIGNAL(triggered()),
+                        this,SLOT(get_working_directory()));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::get_working_directory(void) {
+    working_directory = QFileDialog::getExistingDirectory(this, tr("Select folder to save downloads"),
+                                                 "/home",
+                                                 QFileDialog::ShowDirsOnly
+                                                 | QFileDialog::DontResolveSymlinks);
+    QDir::setCurrent(working_directory);
 }
 
 void MainWindow::send_item(bool) {

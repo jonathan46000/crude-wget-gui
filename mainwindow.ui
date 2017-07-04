@@ -147,7 +147,14 @@
     <addaction name="actionDownload_Path"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Setti&amp;ngs</string>
+    </property>
+    <addaction name="actionDefault_path"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuSettings"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionExit">
@@ -157,7 +164,12 @@
   </action>
   <action name="actionDownload_Path">
    <property name="text">
-    <string>Download Path</string>
+    <string>&amp;Download Path</string>
+   </property>
+  </action>
+  <action name="actionDefault_path">
+   <property name="text">
+    <string>Default path</string>
    </property>
   </action>
  </widget>

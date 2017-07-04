@@ -14,10 +14,13 @@ private:
     QString in_string;                      //url input string
     QString passwd;                         //password
     QString uname;                          //user name
+    QString directory;                      //download directory
     QString uname_flag = "--user";          //wget username flag
     QString passwd_flag = "--password";     //wget password flag
+    QString dir_flag = "-P";                //wget directory flag
     void download_at_index(int index);      //function that calls wget for url on list
-    int is_valid(QString str);             //checks arguments for malicious input
+    int is_valid(QString str);              //checks arguments for malicious input
+    int is_valid_directory(QString str);    //checks valid directory
 
 public:
 
@@ -35,6 +38,7 @@ public slots:
     void set_input(QString);                //adds input url to list
     void set_uname(QString);                //sets uname member
     void set_passwd(QString);               //sets password member
+    void set_directory(QString);            //sets download directory member
     void download_all(void);                //downloads all items on list
 
 };

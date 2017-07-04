@@ -2,6 +2,7 @@
 #include <string>
 #include <QProcess>
 #include <QMessageBox>
+#include <QDir>
 
 Downloader::Downloader(QObject *parent) : QObject(parent)
 {
@@ -36,6 +37,13 @@ void Downloader::set_passwd(QString input_string) {
     }
 }
 
+//
+void Downloader::set_directory(QString input_string) {
+    if(is_valid_directory(input_string)) {
+        directory = input_string;
+    }
+}
+
 //iterates through download_list and calls download_at_index()
 void Downloader::download_all(void) {
     int end = download_list.length();
@@ -53,6 +61,10 @@ void Downloader::download_all(void) {
 void Downloader::download_at_index(int index) {
     QProcess * wget = new QProcess;
     wget->setProgram("wget");
+    if(!directory.isEmpty()) {
+        arguments.append(dir_flag);
+        arguments.append(directory);
+    }
     if(!uname.isEmpty()) {
         arguments.append(uname_flag);
         arguments.append(uname);
@@ -65,6 +77,21 @@ void Downloader::download_at_index(int index) {
     wget->setArguments(arguments);
     wget->start();
     arguments.clear();
+}
+
+//returns true if a directory is valid
+int Downloader::is_valid_directory(QString str) {
+    QDir path_dir(str);
+    path_dir.absolutePath();
+    if (path_dir.exists())
+    {
+        return 1;
+    }
+
+    QMessageBox message_box;
+    message_box.critical(0,"Error","Invalid Directory!");
+    message_box.setFixedSize(500,200);
+    return 0;
 }
 
 //minor effort to check for malicious string insertion
@@ -88,9 +115,9 @@ int Downloader::is_valid(QString str) {
        str.contains("TRUE") ||
        str.contains("FALSE") ||
        str.contains("NULL")) {
-        QMessageBox messageBox;
-        messageBox.critical(0,"Error","Input data is invalid!");
-        messageBox.setFixedSize(500,200);
+        QMessageBox message_box;
+        message_box.critical(0,"Error","Input data is invalid!");
+        message_box.setFixedSize(500,200);
         return 0;
     }
     else {

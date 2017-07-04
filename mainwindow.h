@@ -20,13 +20,15 @@ public slots:
     void clear_list(void);                  //clears download_list window
     void clear_item(void);                  //clears url input QLineEdit
     void get_working_directory(void);       //gets directory from QFileDialog
+    void get_default_directory(void);       //gets directory from QFileDialog
 
 signals:
+    void set_default_directory(QString);    //set default directory
+    void set_download_directory(QString);   //set download directory
     void send_string(QString);              //string SIGNAL activated by send_item(bool)
                                             //sends url string to download_list in downloader
 private:
     Ui::MainWindow *ui;
-    QString working_directory;              //current working directory to download to
-};                                          //should be moved to downloader eventually
+};
 
 #endif // MAINWINDOW_H

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "downloader.h"
+#include "settings.h"
 #include <QDir>
 #include <QFileDialog>
 
@@ -16,6 +17,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pword->setEchoMode(QLineEdit::Password);
 
     Downloader *downloader = new Downloader();
+    Settings *settings = new Settings();
+
+    //set default directory at start up
+    //may want to move to init function as more settings
+    //are created
+    if(!settings->get_default_directory().isEmpty()) {
+        downloader->set_directory(settings->get_default_directory());
+    }
 
     //exit program
     MainWindow::connect(ui->actionExit,SIGNAL(triggered()),
@@ -56,6 +65,19 @@ MainWindow::MainWindow(QWidget *parent) :
     //get path to download to
     MainWindow::connect(ui->actionDownload_Path,SIGNAL(triggered()),
                         this,SLOT(get_working_directory()));
+
+    //get default path to download to
+    MainWindow::connect(ui->actionDefault_path,SIGNAL(triggered()),
+                        this,SLOT(get_default_directory()));
+
+    //set download directory
+    MainWindow::connect(this,SIGNAL(set_download_directory(QString)),
+                        downloader,SLOT(set_directory(QString)));
+
+    //set default directory
+    MainWindow::connect(this,SIGNAL(set_default_directory(QString)),
+                        settings,SLOT(set_default_directory(QString)));
+
 }
 
 MainWindow::~MainWindow()
@@ -69,11 +91,20 @@ MainWindow::~MainWindow()
 
 //opens dialog to set download path
 void MainWindow::get_working_directory(void) {
-    working_directory = QFileDialog::getExistingDirectory(this, tr("Select folder to save downloads"),
+    QString working_directory = QFileDialog::getExistingDirectory(this, tr("Select folder to save downloads"),
                                                  "/home",
                                                  QFileDialog::ShowDirsOnly
                                                  | QFileDialog::DontResolveSymlinks);
-    QDir::setCurrent(working_directory);
+    set_download_directory(working_directory);
+}
+
+//opens dialog to set default download path
+void MainWindow::get_default_directory(void) {
+    QString default_dir = QFileDialog::getExistingDirectory(this, tr("Select folder to save downloads"),
+                                                 "/home",
+                                                 QFileDialog::ShowDirsOnly
+                                                 | QFileDialog::DontResolveSymlinks);
+    set_default_directory(default_dir);
 }
 
 //sends string to be added to download_list

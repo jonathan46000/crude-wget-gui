@@ -21,6 +21,7 @@ public slots:
     void clear_item(void);                  //clears url input QLineEdit
     void get_working_directory(void);       //gets directory from QFileDialog
     void get_default_directory(void);       //gets directory from QFileDialog
+    void about_this_application(void);      //information about current build
 
 signals:
     void set_default_directory(QString);    //set default directory

@@ -4,6 +4,7 @@
 #include "settings.h"
 #include <QDir>
 #include <QFileDialog>
+#include <QMessageBox>
 
 /**************************************************************************************************
  * MAINWINDOW CONSTRUCTOR[CONTAINS SIGNAL/SLOT CONNECTIONS]
@@ -62,6 +63,10 @@ MainWindow::MainWindow(QWidget *parent) :
     MainWindow::connect(downloader,SIGNAL(clear_address()),
                         this,SLOT(clear_item()));
 
+    //about this application
+    MainWindow::connect(ui->actionAbout,SIGNAL(triggered()),
+                        this,SLOT(about_this_application()));
+
     //get path to download to
     MainWindow::connect(ui->actionDownload_Path,SIGNAL(triggered()),
                         this,SLOT(get_working_directory()));
@@ -77,6 +82,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //set default directory
     MainWindow::connect(this,SIGNAL(set_default_directory(QString)),
                         settings,SLOT(set_default_directory(QString)));
+
+
 
 }
 
@@ -105,6 +112,14 @@ void MainWindow::get_default_directory(void) {
                                                  QFileDialog::ShowDirsOnly
                                                  | QFileDialog::DontResolveSymlinks);
     set_default_directory(default_dir);
+}
+
+//information about the current build
+void MainWindow::about_this_application(void) {
+    QMessageBox message_box;
+    message_box.about(0,"About",
+                         "Build: 0.14\nAuthor: Jonathan Lundquist\nLicense: GPL V3\nBuild Date: July 4, 2017");
+    message_box.setFixedSize(500,200);
 }
 
 //sends string to be added to download_list

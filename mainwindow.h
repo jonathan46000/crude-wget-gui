@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "downloader.h"
+#include "settings.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +24,7 @@ public slots:
     void get_working_directory(void);       //gets directory from QFileDialog
     void get_default_directory(void);       //gets directory from QFileDialog
     void about_this_application(void);      //information about current build
+    void open_read_me_file(void);           //open README file
 
 signals:
     void set_default_directory(QString);    //set default directory
@@ -30,6 +33,7 @@ signals:
                                             //sends url string to download_list in downloader
 private:
     Ui::MainWindow *ui;
+    void init_settings(Downloader *dl, Settings *st);   //initialize settings from file
 };
 
 #endif // MAINWINDOW_H

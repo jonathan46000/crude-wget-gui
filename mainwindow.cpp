@@ -5,6 +5,8 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QDesktopServices>
+#include <QCoreApplication>
 
 /**************************************************************************************************
  * MAINWINDOW CONSTRUCTOR[CONTAINS SIGNAL/SLOT CONNECTIONS]
@@ -15,17 +17,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //ensure passwords are not displayed on screen
     ui->pword->setEchoMode(QLineEdit::Password);
 
+    //create objects to handle wget and settings
     Downloader *downloader = new Downloader();
     Settings *settings = new Settings();
 
-    //set default directory at start up
-    //may want to move to init function as more settings
-    //are created
-    if(!settings->get_default_directory().isEmpty()) {
-        downloader->set_directory(settings->get_default_directory());
-    }
+    //initialize settings from saved data
+    MainWindow::init_settings(downloader,settings);
 
     //exit program
     MainWindow::connect(ui->actionExit,SIGNAL(triggered()),
@@ -83,13 +83,29 @@ MainWindow::MainWindow(QWidget *parent) :
     MainWindow::connect(this,SIGNAL(set_default_directory(QString)),
                         settings,SLOT(set_default_directory(QString)));
 
+    //open help.txt in default text editor
+    MainWindow::connect(ui->actionREADME,SIGNAL(triggered()),
+                        this,SLOT(open_read_me_file()));
 
 
 }
 
+
+/*************************************************************************************************
+ * MAINWINDOW PRIVATE FUNCTIONS
+ * **********************************************************************************************/
+
+//Destructor
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+//Private mainwindow function to initialize settings
+void MainWindow::init_settings(Downloader *dl, Settings *st) {
+    if(!st->get_default_directory().isEmpty()) {
+        dl->set_directory(st->get_default_directory());
+    }
 }
 
 /**************************************************************************************************
@@ -118,7 +134,7 @@ void MainWindow::get_default_directory(void) {
 void MainWindow::about_this_application(void) {
     QMessageBox message_box;
     message_box.about(0,"About",
-                         "Build: 0.14\nAuthor: Jonathan Lundquist\nLicense: GPL V3\nBuild Date: July 4, 2017");
+                         "Build: 0.15\nAuthor: Jonathan Lundquist\nLicense: GPL V3\nBuild Date: July 4, 2017");
     message_box.setFixedSize(500,200);
 }
 
@@ -135,4 +151,12 @@ void MainWindow::clear_list() {
 //clears the url input line
 void MainWindow::clear_item() {
     ui->download_address->clear();
+}
+
+//open readme file with default application
+void MainWindow::open_read_me_file() {
+    QString open_url = "file:///";
+    open_url += QCoreApplication::applicationDirPath();
+    open_url += "/README.txt";
+    QDesktopServices::openUrl(open_url);
 }

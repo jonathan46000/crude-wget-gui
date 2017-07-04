@@ -8,6 +8,11 @@
 #include <QMessageBox>
 #include <QTextStream>
 
+/**************************************************************************************************
+ * SETTINGS CONSTRUCTOR
+ *************************************************************************************************/
+
+//settings constructor sets up settings file if doesn't exist and loads its contents if it does
 Settings::Settings(QObject *parent) : QObject(parent), default_directory("") {
     settings_directory = QCoreApplication::applicationDirPath();
     settings_file = settings_directory + "/settings.dat";
@@ -32,6 +37,11 @@ Settings::Settings(QObject *parent) : QObject(parent), default_directory("") {
     }
 }
 
+/**************************************************************************************************
+ * SETTINGS SLOTS
+ *************************************************************************************************/
+
+//sets the default directory and writes it to file
 void Settings::set_default_directory(QString in_string) {
     default_directory = in_string;
     QFile file(settings_file);
@@ -48,6 +58,11 @@ void Settings::set_default_directory(QString in_string) {
     file.close();
 }
 
+/**************************************************************************************************
+ * SETTINGS PUBLIC ACCESSORS
+ *************************************************************************************************/
+
+//returns the current default directory
 QString Settings::get_default_directory(void) {
     return default_directory;
 }

@@ -134,7 +134,7 @@ void MainWindow::get_default_directory(void) {
 void MainWindow::about_this_application(void) {
     QMessageBox message_box;
     message_box.about(0,"About",
-                         "Build: 0.15\nAuthor: Jonathan Lundquist\nLicense: GPL V3\nBuild Date: July 4, 2017");
+                         "Build: 0.16\nAuthor: Jonathan Lundquist\nLicense: GPL V3\nBuild Date: July 4, 2017");
     message_box.setFixedSize(500,200);
 }
 

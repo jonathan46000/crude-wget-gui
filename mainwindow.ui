@@ -70,12 +70,12 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>631</width>
+      <width>321</width>
       <height>18</height>
      </rect>
     </property>
     <property name="text">
-     <string>Download Address</string>
+     <string>Download url</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -130,6 +130,19 @@
      <string>Download</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>10</y>
+      <width>291</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Items to download</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -182,12 +195,12 @@
   </action>
   <action name="actionAbout">
    <property name="text">
-    <string>About</string>
+    <string>&amp;About</string>
    </property>
   </action>
   <action name="actionREADME">
    <property name="text">
-    <string>README</string>
+    <string>&amp;README</string>
    </property>
   </action>
  </widget>

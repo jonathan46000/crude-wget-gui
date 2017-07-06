@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStringListModel>
 #include "downloader.h"
 #include "settings.h"
 
@@ -25,6 +26,8 @@ public slots:
     void get_default_directory(void);       //gets directory from QFileDialog
     void about_this_application(void);      //information about current build
     void open_read_me_file(void);           //open README file
+    void import_download_list(void);
+    void export_download_list(void);
 
 signals:
     void set_default_directory(QString);    //set default directory
@@ -33,6 +36,8 @@ signals:
                                             //sends url string to download_list in downloader
 private:
     Ui::MainWindow *ui;
+    Downloader *dl;
+    QStringListModel *model;
     void init_settings(Downloader *dl, Settings *st);   //initialize settings from file
 };
 

@@ -3,13 +3,15 @@
 #include <QList>
 #include <QObject>
 
+#include "downloadlist.h"
+
 class Downloader : public QObject
 {
     Q_OBJECT
 
 private:
 
-    QList <QString>download_list;           //list of urls to download
+    DownloadList download_list;           //list of urls to download
     QStringList arguments;                  //argument list for wget
     QString in_string;                      //url input string
     QString passwd;                         //password
@@ -25,6 +27,7 @@ private:
 public:
 
     explicit Downloader(QObject *parent = 0);
+    DownloadList* getDownloadList();
 
 signals:
 

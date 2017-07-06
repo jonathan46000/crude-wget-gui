@@ -9,6 +9,10 @@ Downloader::Downloader(QObject *parent) : QObject(parent)
 
 }
 
+DownloadList* Downloader::getDownloadList() {
+    return &download_list;
+}
+
 /**************************************************************************************************
  * DOWNLOADER SLOTS
  *************************************************************************************************/

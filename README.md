@@ -84,6 +84,22 @@
     
         Help->About
         
+### Export
+
+    To export a list of items to download first add each item to the download list
+    following the instructions in "Downloading items".  
+    
+    Once your list is complete select the following from the menu bar
+    
+        File->Export
+        
+### Import
+
+    To import a previously exported list simply select the following from the menu
+    bar:
+    
+        File->Import
+        
 ### Exiting the program
 
     You can exit the program either by clicking the x in the top right corner

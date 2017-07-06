@@ -1,6 +1,10 @@
 #include "downloadlist.h"
 #include <QTextStream>
 
+/**************************************************************************************************
+ * DOWNLOADLIST PUBLIC FUNCTIONS
+ *************************************************************************************************/
+
 //export list of items to download to file
 void DownloadList::export_list(QFile *dest) {
     dest->open(QIODevice::WriteOnly | QIODevice::Text);
@@ -21,7 +25,6 @@ void DownloadList::import_list(QFile *src) {
     }
     src->close();
 }
-
 
 //add new item to list
 void DownloadList::append(QString s) {

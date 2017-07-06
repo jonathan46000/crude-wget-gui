@@ -128,4 +128,3 @@ int Downloader::is_valid(QString str) {
         return 1;
     }
 }
-

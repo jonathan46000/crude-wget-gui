@@ -23,8 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //create objects to handle wget and settings
     this->dl = new Downloader();
-    this->model = this->dl->getDownloadList();
-
+    this->model = this->dl->get_download_list();
     this->ui->listView->setModel(this->model);
 
     Settings *settings = new Settings();
@@ -148,7 +147,7 @@ void MainWindow::get_default_directory(void) {
 void MainWindow::about_this_application(void) {
     QMessageBox message_box;
     message_box.about(0,"About",
-                         "Build: 0.17\nAuthor: Jonathan Lundquist\nLicense: GPL V3\nBuild Date: July 5, 2017");
+                         "Build: 0.1.29\nAuthors: Jonathan Lundquist\n         &dotblank\nLicense: GPL V3\nBuild Date: July 6, 2017");
     message_box.setFixedSize(500,200);
 }
 
@@ -173,6 +172,7 @@ void MainWindow::open_read_me_file() {
     QDesktopServices::openUrl(path);
 }
 
+//save list of items added to file
 void MainWindow::export_download_list() {
 
     QUrl path = QFileDialog::getSaveFileUrl(this,tr("Save file to export"));
@@ -180,14 +180,15 @@ void MainWindow::export_download_list() {
         return;
     }
     QFile exportFile(path.toLocalFile());
-    dl->getDownloadList()->exportList(&exportFile);
+    dl->get_download_list()->export_list(&exportFile);
 }
 
+//import previously exported list from file
 void MainWindow::import_download_list() {
     QUrl path = QFileDialog::getOpenFileUrl(this,tr("Choose file to import"));
     if(path.isEmpty()) {
         return;
     }
     QFile importFile(path.toLocalFile());
-    dl->getDownloadList()->importList(&importFile);
+    dl->get_download_list()->import_list(&importFile);
 }

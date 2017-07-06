@@ -27,7 +27,7 @@ private:
 public:
 
     explicit Downloader(QObject *parent = 0);
-    DownloadList* getDownloadList();
+    DownloadList* get_download_list();
 
 signals:
 

@@ -9,7 +9,7 @@ Downloader::Downloader(QObject *parent) : QObject(parent)
 
 }
 
-DownloadList* Downloader::getDownloadList() {
+DownloadList* Downloader::get_download_list() {
     return &download_list;
 }
 

@@ -8,15 +8,14 @@
 class DownloadList : public QStringListModel
 {
 public:
-    void exportList(QFile *dest);
-    void importList(QFile *src);
-
-    void append(QString);
-    int length();
-    QString at(int idx);
-    void clear();
+    void export_list(QFile *dest);       //export list to file
+    void import_list(QFile *src);        //import list from file
+    void append(QString);               //add to list
+    int length();                       //return list length
+    QString at(int idx);                //get string at index
+    void clear();                       //clear list
 private:
-    QStringList list;
+    QStringList list;                   //list of items to download
 };
 
 #endif // DOWNLOADLIST_H

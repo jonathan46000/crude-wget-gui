@@ -37,7 +37,7 @@ signals:
 private:
     Ui::MainWindow *ui;
     Downloader *dl;
-    QStringListModel *model;
+    DownloadList *model;
     void init_settings(Downloader *dl, Settings *st);   //initialize settings from file
 };
 

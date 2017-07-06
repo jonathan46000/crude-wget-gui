@@ -159,7 +159,7 @@ void MainWindow::send_item(bool) {
 
 //clears the list window
 void MainWindow::clear_list() {
-    model->removeRows(0,model->rowCount());
+    model->clear();
 }
 
 //clears the url input line

@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QDesktopServices>
+#include <QUrl>
 #include <QCoreApplication>
 
 /**************************************************************************************************
@@ -21,11 +22,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pword->setEchoMode(QLineEdit::Password);
 
     //create objects to handle wget and settings
-    Downloader *downloader = new Downloader();
+    this->dl = new Downloader();
+    this->model = this->dl->getDownloadList();
+
+    this->ui->listView->setModel(this->model);
+
     Settings *settings = new Settings();
 
     //initialize settings from saved data
-    MainWindow::init_settings(downloader,settings);
+    MainWindow::init_settings(dl,settings);
 
     //exit program
     MainWindow::connect(ui->actionExit,SIGNAL(triggered()),
@@ -37,30 +42,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //send_string SIGNAL adds item to download_list
     MainWindow::connect(this,SIGNAL(send_string(QString)),
-                        downloader,SLOT(set_input(QString)));
+                        dl,SLOT(set_input(QString)));
 
     //adds item to the list window
-    MainWindow::connect(downloader, SIGNAL(send_output_string(QString)),
-                        ui->item_list,SLOT(appendPlainText(QString)));
+    //MainWindow::connect(dl, SIGNAL(send_output_string(QString)),
+    //                    ui->item_list,SLOT(appendPlainText(QString)));
 
     //updates uname variable when username text is changed
     MainWindow::connect(ui->uname,SIGNAL(textChanged(QString)),
-                        downloader,SLOT(set_uname(QString)));
+                        dl,SLOT(set_uname(QString)));
 
     //updates passwd variable when password text is changed
     MainWindow::connect(ui->pword,SIGNAL(textChanged(QString)),
-                        downloader,SLOT(set_passwd(QString)));
+                        dl,SLOT(set_passwd(QString)));
 
     //downloads all items in the download_list
     MainWindow::connect(ui->download_list,SIGNAL(clicked()),
-                        downloader,SLOT(download_all()));
+                        dl,SLOT(download_all()));
 
     //clears the items in the list window
-    MainWindow::connect(downloader,SIGNAL(clear_list_window()),
+    MainWindow::connect(dl,SIGNAL(clear_list_window()),
                         this,SLOT(clear_list()));
 
     //clears the url input when url is added to list
-    MainWindow::connect(downloader,SIGNAL(clear_address()),
+    MainWindow::connect(dl,SIGNAL(clear_address()),
                         this,SLOT(clear_item()));
 
     //about this application
@@ -77,7 +82,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //set download directory
     MainWindow::connect(this,SIGNAL(set_download_directory(QString)),
-                        downloader,SLOT(set_directory(QString)));
+                        dl,SLOT(set_directory(QString)));
 
     //set default directory
     MainWindow::connect(this,SIGNAL(set_default_directory(QString)),
@@ -86,6 +91,15 @@ MainWindow::MainWindow(QWidget *parent) :
     //open help.txt in default text editor
     MainWindow::connect(ui->actionREADME,SIGNAL(triggered()),
                         this,SLOT(open_read_me_file()));
+
+    //open import list dialog
+    MainWindow::connect(ui->actionImport_Download_List,SIGNAL(triggered()),
+                        this,SLOT(import_download_list()));
+
+    //open export list dialog
+    MainWindow::connect(ui->actionExport_Download_List,SIGNAL(triggered()),
+                        this,SLOT(export_download_list()));
+
 
 
 }
@@ -145,7 +159,7 @@ void MainWindow::send_item(bool) {
 
 //clears the list window
 void MainWindow::clear_list() {
-    ui->item_list->clear();
+    model->clear();
 }
 
 //clears the url input line
@@ -155,8 +169,25 @@ void MainWindow::clear_item() {
 
 //open readme file with default application
 void MainWindow::open_read_me_file() {
-    QString open_url = "file:///";
-    open_url += QCoreApplication::applicationDirPath();
-    open_url += "/README.txt";
-    QDesktopServices::openUrl(open_url);
+    QUrl path("file:////"  +QCoreApplication::applicationDirPath() + "/README.txt");
+    QDesktopServices::openUrl(path);
+}
+
+void MainWindow::export_download_list() {
+
+    QUrl path = QFileDialog::getSaveFileUrl(this,tr("Save file to export"));
+    if(path.isEmpty()) {
+        return;
+    }
+    QFile exportFile(path.toLocalFile());
+    dl->getDownloadList()->exportList(&exportFile);
+}
+
+void MainWindow::import_download_list() {
+    QUrl path = QFileDialog::getOpenFileUrl(this,tr("Choose file to import"));
+    if(path.isEmpty()) {
+        return;
+    }
+    QFile importFile(path.toLocalFile());
+    dl->getDownloadList()->importList(&importFile);
 }

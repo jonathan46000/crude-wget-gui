@@ -55,16 +55,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="item_list">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>30</y>
-      <width>291</width>
-      <height>171</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
@@ -143,6 +133,19 @@
      <string>Items to download</string>
     </property>
    </widget>
+   <widget class="QListView" name="listView">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>30</y>
+      <width>291</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -150,7 +153,7 @@
      <x>0</x>
      <y>0</y>
      <width>660</width>
-     <height>30</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -158,6 +161,8 @@
      <string>Fi&amp;le</string>
     </property>
     <addaction name="actionDownload_Path"/>
+    <addaction name="actionImport_Download_List"/>
+    <addaction name="actionExport_Download_List"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
@@ -201,6 +206,16 @@
   <action name="actionREADME">
    <property name="text">
     <string>&amp;README</string>
+   </property>
+  </action>
+  <action name="actionImport_Download_List">
+   <property name="text">
+    <string>&amp;Import Download List</string>
+   </property>
+  </action>
+  <action name="actionExport_Download_List">
+   <property name="text">
+    <string>E&amp;xport Download List</string>
    </property>
   </action>
  </widget>

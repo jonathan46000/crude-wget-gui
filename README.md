@@ -1,7 +1,7 @@
 # crude-wget-gui
-[Crude wget gui]
+## [Crude wget gui]
 
--About the program
+### About the program
 
     Version: 0.17
     
@@ -18,23 +18,23 @@
     contributors: 
         Jonathan L. http://jonathan46000.com
 
-[Build/Installation Instructions]
+## [Build/Installation Instructions]
 
--Minimum tested build environment
+### Minimum tested build environment
 
     Qt 5.6.1 or greater,
     GCC 4.8.5 or greater, 
     64 bit Linux
 
--Required Packages
+### Required Packages
 
     GNU Wget 1.14 or greater,
     
--Build Instructions
+### Build Instructions
 
     Load project and build with QtCreator
     
--Post build instructions
+### Post build instructions
 
     Move README.txt, GNU GPL V3 license, and wgg_icon.png into folder with executable
     
@@ -42,9 +42,9 @@
         
         $make clean
         
-[Using crude wget gui]
+## [Using crude wget gui]
 
--Setting default download path
+### Setting default download path
 
     The default download path will save your prefered download path and 
     reload this path everytime the program opens.  This setting can be 
@@ -52,7 +52,7 @@
     
         Settings->Default path
     
--Setting the current path
+### Setting the current path
 
     Setting the current path only sets the download path for the current session.
     Setting the current path will override the default download path.  Setting
@@ -61,7 +61,7 @@
     
         File->Download Path
         
--Downloading items
+### Downloading items
 
     Copy the url of an item you would like to download "Download url" text box.
     Press the "Add item" button.  If the url appears in the "Items to download"
@@ -72,7 +72,7 @@
     password enter them in the "Username" and "Password" text boxes.  Once you 
     are ready to download press the "Download" button.
     
--Help
+### Help
 
     This help file can be accessed in your default text editor by selecting the
     following from the menu bar:
@@ -84,7 +84,7 @@
     
         Help->About
         
--Exiting the program
+### Exiting the program
 
     You can exit the program either by clicking the x in the top right corner
     or by selecting File->Exit from the menu bar.

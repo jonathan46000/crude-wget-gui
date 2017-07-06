@@ -1,8 +1,8 @@
-##Contributing Guidelines
+# Contributing Guidelines
 
-##[style]
+## [style]
 
-*Function names and prototypes
+* Function names and prototypes
 
   Function names shall describe the function purpose.  They shall be all lower case with words
   separated by underscore.  All functions that are not inline shall have prototypes.  Function
@@ -18,14 +18,14 @@
         return parameter2 + parameter1;
     }
    
-*Variable/object names
+* Variable/object names
 
   Variable names shall descrive the variables contents.  They shall be all lower case with
   words separated by underscore.  Variable names shall follow the example below:
   
     double description_of_variable;
     
-*Line spacing
+* Line spacing
 
   There shall be no spaces between lines in a function unless a comment describing the line
   below occupies that space.  There shall be one line space between the end of a function
@@ -45,7 +45,7 @@
         }
     }
     
-*Commenting(minimum requirements)
+* Commenting(minimum requirements)
 
   All functions shall contain a one line comment above the function describing its purpose and
   any amplifying critical information.
@@ -56,26 +56,26 @@
   Class variables will contain a comment on the same line as they are defined in line with the
   other variables in the same header.
   
-##[Technical code guidelines]
+## [Technical code guidelines]
 
-*Qt Framework vs STL Classes
+* Qt Framework vs STL Classes
 
   Only Qt Framework or derived classes/objects shall be included in this project.  No STL classes 
   shall be used directly in the project unless a Qt analogue or container does not exist.
   
-*Access specifiers for data members
+* Access specifiers for data members
 
   Only class data members that are static const data members for the purpose of being used as a bit
   mask shall be delcared public.  All other data members shall be protected or private and accesors
   or mutators provided as appropriate.
   
-*Global variables
+* Global variables
 
   The Qt signals and slots mechanism negates the need for any global variable.  The project shall
   contain no new variables in global scope.  If an exemption is thought to be required for this
   guideline an email to the maintainer regarding the request should accompany the pull request.
   
-##[Future guidelines]
+## [Future guidelines]
 
   Project guidelines may change abruptly.  Before issuing a pull request, please check this page
   to ensure that your code meets the most current guidelines.
